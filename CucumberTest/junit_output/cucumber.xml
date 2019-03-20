@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="21.873838">
+<testcase classname="Local 13 Login Feature" name="Local 13 Login Scenario" time="21.873838">
+<system-out><![CDATA[Given User is on Login Page.................................................passed
+When the title of Login page is Login.......................................passed
+And User enters "mgg" and "mgg1105".........................................passed
+And User Clicks on Login button.............................................passed
+Then User is on Dashboard...................................................passed
+]]></system-out>
+</testcase>
+</testsuite>

@@ -1,0 +1,96 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 13,
+        "name": "Local 13 Login Scenario",
+        "description": "",
+        "id": "local-13-login-feature;local-13-login-scenario;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 11372601221,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "User is on Login Page",
+            "match": {
+              "location": "LoginSteps.user_is_on_Login_Page()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 29356716,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "the title of Login page is Login",
+            "match": {
+              "location": "LoginSteps.the_title_of_Login_page_is_Login()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 121843117,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User enters \"mgg\" and \"mgg1105\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "mgg",
+                  "offset": 13
+                },
+                {
+                  "val": "mgg1105",
+                  "offset": 23
+                }
+              ],
+              "location": "LoginSteps.user_enters_username_and_Password(String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1
+            ],
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 10319423147,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User Clicks on Login button",
+            "match": {
+              "location": "LoginSteps.user_Clicks_on_Login_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 30613582,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "User is on Dashboard",
+            "match": {
+              "location": "LoginSteps.user_is_on_Dashboard()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Local 13 Login Feature",
+    "description": "",
+    "id": "local-13-login-feature",
+    "keyword": "Feature",
+    "uri": "Login.feature"
+  }
+]

@@ -1,5 +1,5 @@
 Feature: Local 13 Login Feature
- @SmokeTest @RegressionTest
+ @SmokeTest
  Scenario Outline: Local 13 Successful Login Scenario
     Given User is on Login Page
     When the title of Login page is Login

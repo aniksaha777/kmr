@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="0">
-<testcase classname="Local 13 Login Feature" name="Local 13 Successful Login Scenario" time="0">
-<system-out><![CDATA[Given User is on Login Page.................................................skipped
-When the title of Login page is Login.......................................skipped
-And User enters "mgg" and "mgg1105".........................................skipped
-And User Clicks on Login button.............................................skipped
-Then User is on Dashboard...................................................skipped
-]]></system-out>
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" time="0">
+<testcase classname="dummy" name="dummy">
+<skipped message="No features found"/>
 </testcase>
 </testsuite>

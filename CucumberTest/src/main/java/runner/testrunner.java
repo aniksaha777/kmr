@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 		features = "C:\\Users\\SAMMSALAPTOP1\\Desktop\\Automation\\CucumberTest\\src\\main\\java\\Features",
 		glue={"StepDefinations"},
 		format= {"pretty","html:test-output","json:json_output/cucumber.json","junit:junit_output/cucumber.xml"},
-		dryRun= false,
+		dryRun= true,
 		monochrome= true,
 		strict =true,
 		tags = {"@SmokeTest"}

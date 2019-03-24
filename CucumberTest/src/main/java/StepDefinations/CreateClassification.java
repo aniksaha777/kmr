@@ -1,4 +1,6 @@
 package StepDefinations;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,6 +37,7 @@ public class CreateClassification {
 	public void user_is_on_Apps_Builder_Create_Classification_Page() {
 		driver.findElement(By.xpath("//*[@id=\"build_a_2\"]")).click();
 		driver.findElement(By.xpath("//*[@id=\"build_div_2\"]//button[2]/img")).click();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
 		driver.findElement(By.xpath("//*[text()=\"Manage Classification\"]")).click();
 		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
 		driver.findElement(By.xpath("//*[@id=\"function_111\"]//a")).click();

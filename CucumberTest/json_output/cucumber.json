@@ -12,7 +12,7 @@
         "steps": [
           {
             "result": {
-              "duration": 38833179631,
+              "duration": 33586514054,
               "status": "passed"
             },
             "line": 4,
@@ -24,7 +24,7 @@
           },
           {
             "result": {
-              "duration": 47634197872,
+              "duration": 12666371085,
               "status": "passed"
             },
             "line": 5,
@@ -36,7 +36,7 @@
           },
           {
             "result": {
-              "duration": 12691753619,
+              "duration": 6259866017,
               "status": "passed"
             },
             "line": 6,
@@ -70,7 +70,7 @@
           },
           {
             "result": {
-              "duration": 11264392792,
+              "duration": 11149783531,
               "status": "passed"
             },
             "line": 9,
@@ -115,6 +115,6 @@
     "description": "",
     "id": "local-13-manage-classification",
     "keyword": "Feature",
-    "uri": "C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/main/java/Features/CreateClassification.feature"
+    "uri": "C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/CreateClassification.feature"
   }
 ]

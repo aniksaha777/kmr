@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="110.423524">
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Create Classification" time="110.423524">
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="63.662535">
+<testcase classname="Local 13 Manage Classification" name="Manage Classification - Create Classification" time="63.662535">
 <system-out><![CDATA[Given The User is logged in.................................................passed
 When User is on Apps Builder Create Classification Page.....................passed
 And the user enters valid data and clicks on Submit.........................passed

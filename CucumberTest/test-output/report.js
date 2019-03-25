@@ -1,4 +1,4 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/main/java/Features/CreateClassification.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/CreateClassification.feature");
 formatter.feature({
   "line": 1,
   "name": "Local 13 Manage Classification",
@@ -88,28 +88,28 @@ formatter.match({
   "location": "CreateClassification.the_User_is_logged_in()"
 });
 formatter.result({
-  "duration": 38833179631,
+  "duration": 33586514054,
   "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.user_is_on_Apps_Builder_Create_Classification_Page()"
 });
 formatter.result({
-  "duration": 47634197872,
+  "duration": 12666371085,
   "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.the_user_enters_valid_data_and_clicks_on_Submit(DataTable)"
 });
 formatter.result({
-  "duration": 12691753619,
+  "duration": 6259866017,
   "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.new_classification_is_displayed_in_grid(DataTable)"
 });
 formatter.result({
-  "duration": 11264392792,
+  "duration": 11149783531,
   "status": "passed"
 });
 });

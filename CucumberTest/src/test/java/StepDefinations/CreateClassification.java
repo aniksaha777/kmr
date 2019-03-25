@@ -51,7 +51,7 @@ public class CreateClassification {
 		AppsBuiler.click();
 		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"build_div_1\"]/div/button[@class=\"next\"]/img")));
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
-		driver.findElement(By.xpath("//*[@id=\"build_div_1\"]/div/button[@class=\"next\"]")).click();
+		driver.findElement(By.xpath("//*[@id=\"build_div_1\"]//button[@class=\"next\"]/img")).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
 		highlighter.highLightElement(driver, driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")));
 		driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")).click();

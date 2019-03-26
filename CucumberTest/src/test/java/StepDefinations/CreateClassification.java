@@ -10,11 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.junit.Assert;
+import org.junit.Assert.*;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-import junit.framework.Assert;
+import cucumber.runtime.junit.Assertions;
 import runner.highlighter;
 
 @SuppressWarnings("deprecation")
@@ -85,19 +86,21 @@ public class CreateClassification {
 	}
 
 	@Then("^new classification is displayed in grid$")
-	public void new_classification_is_displayed_in_grid(DataTable VerifyClassification) throws InterruptedException {
+	public int new_classification_is_displayed_in_grid(DataTable VerifyClassification) throws InterruptedException {
 		List<Map<String, String>> lista = VerifyClassification.asMaps(String.class, String.class);
 		Thread.sleep(5000);
 		List  col = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr[2]/td"));
         List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
+        boolean isFound = false;
         for(int i=2;i<=rows.size();i++) {    	 
         	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
         	String cdesc = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
-        	String Short = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText(); 
+        	String Short = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText();
         	String cgrp = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[4]")).getText();
-        	String Wages = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[5]")).getText(); 
+        	String Wages = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[5]")).getText();
+        	
         	if(lista.get(0).get("Classification_Code").equals(gid)) {
-        		System.out.println("Classification Code Matched:"+gid);
+        		System.out.println("Classification Code Matched:"+gid);       		
         		if(lista.get(0).get("Classification_Desc").equals(cdesc)) {
         			System.out.println("Classification desc Matched:"+cdesc);
         			if(lista.get(0).get("Short").equals(Short)) {
@@ -106,28 +109,80 @@ public class CreateClassification {
         					System.out.println("Classification_Group Matched:"+cgrp);
         					if(lista.get(0).get("Wages").equals(Wages)){
         						System.out.println("Wages Matched:"+Wages);
+        						isFound = true;
         	        			 break;
         					}
+        				}
         			}
-        			
-        		}
-        		else {
-            		Assert.fail();
             	}
-        	break;
-        	
-        	} 	 
-        }  
+        }
+        if(isFound) {
+        	System.out.println("found");
+        }
+        else {
+        	System.out.println("not found");
+        	Assert.fail("Not Found");
+        }
         driver.switchTo().defaultContent();
         driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
-        //WebDriverWait wait = new WebDriverWait(driver,30);
-        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(text(),\"User Name\")]")));
-        //Thread.sleep(5000);
 		String title = driver.getTitle();
-	    Assert.assertEquals("Login | Local-13", title);
-	    
+	    Assert.assertEquals("Login | Local-13", title);    
 	    driver.close();
-        
+		return 0;    
+	}
+	
+	
+	@When("^User is on Apps Builder Edit Classification Page$")
+	public void user_is_on_Apps_Builder_Edit_Classification_Page() throws InterruptedException{
+		WebElement AppsBuiler =driver.findElement(By.xpath("//*[@id=\"build_a_2\"]"));
+		highlighter.highLightElement(driver, AppsBuiler);
+		AppsBuiler.click();
+		driver.switchTo().frame("functionContent");
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")));
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.switchTo().defaultContent();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"function_112\"]/span/a")));
+		driver.findElement(By.xpath("//*[@id=\"function_112\"]/span/a")).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.switchTo().frame("functionContent");	
+
+	}
+
+	@When("^User selects classification and clicks on Edit$")
+	public void user_selects_classification_and_clicks_on_Edit(DataTable ReadCl) throws InterruptedException  {
+		List<Map<String, String>> lista = ReadCl.asMaps(String.class, String.class);
+		Thread.sleep(5000);
+        List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
+        for(int i=1;i<=rows.size();i++) {
+        	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
+        	String cdesc = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
+        	if(lista.get(0).get("Classification_Code").equals(gid)) {
+        		if(lista.get(0).get("Classification_Desc").equals(cdesc)) {
+        			driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr["+i+"]/td[6]/a[@href]")).click();
+        			System.out.println("Clicked on the Edit Button Successfully");
+        			break;
+        		}
+        	}
+        }
+	}
+
+	@When("^User Edits classification data and clicks on Submit$")
+	public void user_Edits_classification_data_and_clicks_on_Submit(DataTable EditCl) throws InterruptedException {
+		List<Map<String, String>> liste = EditCl.asMaps(String.class, String.class);
+		Select cf_grp = new Select(driver.findElement(By.xpath("//*[@id=\"ClassificationGroupID\"]")));
+		cf_grp.selectByVisibleText(liste.get(0).get("Classification_Group"));
+		driver.findElement(By.xpath("//*[@id=\"ClassificationCode\"]")).sendKeys(liste.get(0).get("Classification_Code"));
+		driver.findElement(By.xpath("//*[@id=\"ClassificationDescription\"]")).sendKeys(liste.get(0).get("Classification_Desc"));
+		driver.findElement(By.xpath("//*[@id=\"Short\"]")).sendKeys(liste.get(0).get("Short"));
+		driver.findElement(By.xpath("//*[@id=\"Wages\"]")).sendKeys(liste.get(0).get("Wages"));
+		System.out.println("Data Edited Successfully");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"Submit\"]")).click();
+		System.out.println("User clicked on Submit");		
 	}
 
 }

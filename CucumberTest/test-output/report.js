@@ -88,26 +88,170 @@ formatter.match({
   "location": "CreateClassification.the_User_is_logged_in()"
 });
 formatter.result({
-  "duration": 3451946624,
-  "error_message": "org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status\nfrom unknown error: cannot determine loading status\nfrom disconnected: received Inspector.detached event\n  (Session info: chrome\u003d73.0.3683.86)\n  (Driver info: chromedriver\u003d2.45.615291 (ec3682e3c9061c10f26ea9e5cdcf3c53f3f74387),platform\u003dWindows NT 10.0.17134 x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 0 milliseconds\nBuild info: version: \u00273.5.3\u0027, revision: \u0027a88d25fe6b\u0027, time: \u00272017-08-29T12:42:44.417Z\u0027\nSystem info: host: \u0027DESKTOP-9QM2DH8\u0027, ip: \u0027192.168.137.1\u0027, os.name: \u0027Windows 10\u0027, os.arch: \u0027amd64\u0027, os.version: \u002710.0\u0027, java.version: \u002710.0.2\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities [{mobileEmulationEnabled\u003dfalse, timeouts\u003d{implicit\u003d0, pageLoad\u003d300000, script\u003d30000}, hasTouchScreen\u003dfalse, platform\u003dXP, acceptSslCerts\u003dfalse, goog:chromeOptions\u003d{debuggerAddress\u003dlocalhost:51185}, acceptInsecureCerts\u003dfalse, webStorageEnabled\u003dtrue, browserName\u003dchrome, takesScreenshot\u003dtrue, javascriptEnabled\u003dtrue, platformName\u003dXP, setWindowRect\u003dtrue, unexpectedAlertBehaviour\u003dignore, applicationCacheEnabled\u003dfalse, rotatable\u003dfalse, networkConnectionEnabled\u003dfalse, chrome\u003d{chromedriverVersion\u003d2.45.615291 (ec3682e3c9061c10f26ea9e5cdcf3c53f3f74387), userDataDir\u003dC:\\Users\\SAMMSA~1\\AppData\\Local\\Temp\\scoped_dir10496_3857}, takesHeapSnapshot\u003dtrue, unhandledPromptBehavior\u003dignore, pageLoadStrategy\u003dnormal, strictFileInteractability\u003dfalse, databaseEnabled\u003dfalse, handlesAlerts\u003dtrue, version\u003d73.0.3683.86, browserConnectionEnabled\u003dfalse, proxy\u003dProxy(), nativeEvents\u003dtrue, locationContextEnabled\u003dtrue, cssSelectorsEnabled\u003dtrue}]\nSession ID: cd6b408c0af196423b11bb6323ee9ed3\r\n\tat java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\r\n\tat java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\r\n\tat java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:215)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:167)\r\n\tat org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:82)\r\n\tat org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:45)\r\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:164)\r\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:82)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:646)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:370)\r\n\tat StepDefinations.CreateClassification.the_User_is_logged_in(CreateClassification.java:31)\r\n\tat ✽.Given The User is logged in(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:4)\r\n",
-  "status": "failed"
+  "duration": 21150008533,
+  "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.user_is_on_Apps_Builder_Create_Classification_Page()"
 });
 formatter.result({
-  "status": "skipped"
+  "duration": 12146369535,
+  "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.the_user_enters_valid_data_and_clicks_on_Submit(DataTable)"
 });
 formatter.result({
-  "status": "skipped"
+  "duration": 4116242811,
+  "status": "passed"
 });
 formatter.match({
   "location": "CreateClassification.new_classification_is_displayed_in_grid(DataTable)"
 });
 formatter.result({
-  "status": "skipped"
+  "duration": 5171242101,
+  "error_message": "java.lang.AssertionError: Data not Matching\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)\r\n\tat ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:9)\r\n",
+  "status": "failed"
+});
+formatter.scenario({
+  "line": 14,
+  "name": "Manage Classification - Edit Classification",
+  "description": "",
+  "id": "local-13-manage-classification;manage-classification---edit-classification",
+  "type": "scenario",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "line": 13,
+      "name": "@SmokeTest"
+    }
+  ]
+});
+formatter.step({
+  "line": 15,
+  "name": "The User is logged in",
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 16,
+  "name": "User is on Apps Builder Edit Classification Page",
+  "keyword": "When "
+});
+formatter.step({
+  "line": 17,
+  "name": "User selects classification and clicks on Edit",
+  "rows": [
+    {
+      "cells": [
+        "Classification_Group",
+        "Classification_Code",
+        "Classification_Desc",
+        "Short",
+        "Wages"
+      ],
+      "line": 18
+    },
+    {
+      "cells": [
+        "Apprentice",
+        "BTAB1",
+        "Building Trade Apprentice Pipefitter",
+        "AB12",
+        "33.70"
+      ],
+      "line": 19
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 20,
+  "name": "User Edits classification data and clicks on Submit",
+  "rows": [
+    {
+      "cells": [
+        "Classification_Group",
+        "Classification_Code",
+        "Classification_Desc",
+        "Short",
+        "Wages"
+      ],
+      "line": 21
+    },
+    {
+      "cells": [
+        "Journeyman",
+        "BTAB2",
+        "Building Trade Apprentice Plumber",
+        "AB12",
+        "21.56"
+      ],
+      "line": 22
+    }
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 23,
+  "name": "new classification is displayed in grid",
+  "rows": [
+    {
+      "cells": [
+        "Classification_Group",
+        "Classification_Code",
+        "Classification_Desc",
+        "Short",
+        "Wages"
+      ],
+      "line": 24
+    },
+    {
+      "cells": [
+        "Journeyman",
+        "BTAB2",
+        "Building Trade Apprentice Plumber",
+        "AB12",
+        "21.56"
+      ],
+      "line": 25
+    }
+  ],
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "CreateClassification.the_User_is_logged_in()"
+});
+formatter.result({
+  "duration": 19202410817,
+  "status": "passed"
+});
+formatter.match({
+  "location": "CreateClassification.user_is_on_Apps_Builder_Edit_Classification_Page()"
+});
+formatter.result({
+  "duration": 11736763076,
+  "status": "passed"
+});
+formatter.match({
+  "location": "CreateClassification.user_selects_classification_and_clicks_on_Edit(DataTable)"
+});
+formatter.result({
+  "duration": 9614648726,
+  "status": "passed"
+});
+formatter.match({
+  "location": "CreateClassification.user_Edits_classification_data_and_clicks_on_Submit(DataTable)"
+});
+formatter.result({
+  "duration": 3789584314,
+  "status": "passed"
+});
+formatter.match({
+  "location": "CreateClassification.new_classification_is_displayed_in_grid(DataTable)"
+});
+formatter.result({
+  "duration": 5182909615,
+  "error_message": "java.lang.AssertionError: Data not Matching\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)\r\n\tat ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:23)\r\n",
+  "status": "failed"
 });
 });

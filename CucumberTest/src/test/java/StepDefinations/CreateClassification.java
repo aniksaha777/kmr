@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
@@ -21,6 +23,7 @@ public class CreateClassification {
 	
 	WebDriver driver;
 	
+	WebDriverWait wait = new WebDriverWait(driver,30);
 	@Given("^The User is logged in$")
 	public void the_User_is_logged_in() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\SAMMSALAPTOP1\\Desktop\\AutomationDrivers\\chromedriver_win32\\chromedriver.exe");
@@ -55,6 +58,7 @@ public class CreateClassification {
 		driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
 		driver.switchTo().defaultContent();
+		Thread.sleep(5000);
 		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")));
 		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
 		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"function_111\"]/span/a")));
@@ -114,8 +118,13 @@ public class CreateClassification {
         	
         	} 	 
         }  
-        
-        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]"));
+        driver.switchTo().defaultContent();
+        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(text(),\"User Name\")]")));
+		String title = driver.getTitle();
+	    Assert.assertEquals("Login | Local-13", title);
+	    
+	    driver.close();
         
 	}
 

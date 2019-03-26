@@ -55,9 +55,6 @@ public class CreateClassification {
 		driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
 		driver.switchTo().defaultContent();
-		highlighter.highLightElement(driver, driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")));
-		driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")).click();
-		Thread.sleep(5000);
 		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")));
 		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
 		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"function_111\"]/span/a")));

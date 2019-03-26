@@ -1,29 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="2" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="2" time="92.11018">
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Create Classification" time="42.583863">
-<failure message="java.lang.AssertionError: Data not Matching&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)&#13;&#10;&#9;at ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:9)&#13;&#10;"><![CDATA[Given The User is logged in.................................................passed
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="3" time="265.564703">
+<testcase classname="Local 13 Manage Classification" name="Manage Classification - Create Classification" time="100.235238">
+<system-out><![CDATA[Given The User is logged in.................................................passed
 When User is on Apps Builder Create Classification Page.....................passed
 And the user enters valid data and clicks on Submit.........................passed
-Then new classification is displayed in grid................................failed
-
-StackTrace:
-java.lang.AssertionError: Data not Matching
-	at org.junit.Assert.fail(Assert.java:88)
-	at StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)
-	at ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:9)
-]]></failure>
+Then new classification is displayed in grid................................passed
+]]></system-out>
 </testcase>
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Edit Classification" time="49.526317">
-<failure message="java.lang.AssertionError: Data not Matching&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)&#13;&#10;&#9;at ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:23)&#13;&#10;"><![CDATA[Given The User is logged in.................................................passed
+<testcase classname="Local 13 Manage Classification" name="Manage Classification - Edit Classification" time="82.285207">
+<system-out><![CDATA[Given The User is logged in.................................................passed
 When User is on Apps Builder Edit Classification Page.......................passed
 And User selects classification and clicks on Edit..........................passed
 And User Edits classification data and clicks on Submit.....................passed
-Then new classification is displayed in grid................................failed
-
-StackTrace:
-java.lang.AssertionError: Data not Matching
-	at org.junit.Assert.fail(Assert.java:88)
-	at StepDefinations.CreateClassification.new_classification_is_displayed_in_grid(CreateClassification.java:121)
-	at ✽.Then new classification is displayed in grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/ManageClassification.feature:23)
-]]></failure>
+Then new classification is displayed in grid................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Local 13 Manage Classification" name="Manage Classification - Delete Classification" time="83.044258">
+<system-out><![CDATA[Given The User is logged in.................................................passed
+When User is on Apps Builder Edit Classification Page.......................passed
+And User selects classification and clicks on Delete........................passed
+And User Clicks on Ok in Alert..............................................passed
+Then new classification is not displayed in grid............................passed
+]]></system-out>
 </testcase>
 </testsuite>

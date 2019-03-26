@@ -1,3 +1,4 @@
+
 package StepDefinations;
 import java.util.List;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,10 +19,10 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import cucumber.runtime.junit.Assertions;
 import runner.highlighter;
-
+import org.openqa.selenium.*;
 @SuppressWarnings("deprecation")
 
-public class CreateClassification {
+public class ManageClassification {
 	
 	WebDriver driver;
 	
@@ -85,8 +87,8 @@ public class CreateClassification {
 		
 	}
 
-	@Then("^new classification is displayed in grid$")
-	public int new_classification_is_displayed_in_grid(DataTable VerifyClassification) throws InterruptedException {
+	@Then("^new classification is displayed in grid$") 
+	public void new_classification_is_displayed_in_grid(DataTable VerifyClassification) throws InterruptedException {
 		List<Map<String, String>> lista = VerifyClassification.asMaps(String.class, String.class);
 		Thread.sleep(5000);
 		List  col = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr[2]/td"));
@@ -116,19 +118,15 @@ public class CreateClassification {
         			}
             	}
         }
-        if(isFound) {
-        	System.out.println("found");
-        }
-        else {
-        	System.out.println("not found");
-        	Assert.fail("Not Found");
-        }
         driver.switchTo().defaultContent();
         driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
 		String title = driver.getTitle();
 	    Assert.assertEquals("Login | Local-13", title);    
 	    driver.close();
-		return 0;    
+	    if(isFound==false) {
+        	System.out.println("Row Not found");
+        	Assert.fail("Data is not Present");
+        }   
 	}
 	
 	
@@ -175,14 +173,101 @@ public class CreateClassification {
 		List<Map<String, String>> liste = EditCl.asMaps(String.class, String.class);
 		Select cf_grp = new Select(driver.findElement(By.xpath("//*[@id=\"ClassificationGroupID\"]")));
 		cf_grp.selectByVisibleText(liste.get(0).get("Classification_Group"));
-		driver.findElement(By.xpath("//*[@id=\"ClassificationCode\"]")).sendKeys(liste.get(0).get("Classification_Code"));
+		driver.findElement(By.xpath("//*[@id=\"ClassificationCode\"]")).sendKeys(Keys.chord(Keys.CONTROL, "a"), liste.get(0).get("Classification_Code"));
+		//driver.findElement(By.xpath("//*[@id=\"ClassificationCode\"]")).sendKeys(liste.get(0).get("Classification_Code"));
+		driver.findElement(By.xpath("//*[@id=\"ClassificationDescription\"]")).clear();
 		driver.findElement(By.xpath("//*[@id=\"ClassificationDescription\"]")).sendKeys(liste.get(0).get("Classification_Desc"));
+		driver.findElement(By.xpath("//*[@id=\"Short\"]")).clear();
 		driver.findElement(By.xpath("//*[@id=\"Short\"]")).sendKeys(liste.get(0).get("Short"));
+		driver.findElement(By.xpath("//*[@id=\"Wages\"]")).clear();
 		driver.findElement(By.xpath("//*[@id=\"Wages\"]")).sendKeys(liste.get(0).get("Wages"));
 		System.out.println("Data Edited Successfully");
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"Submit\"]")).click();
 		System.out.println("User clicked on Submit");		
+	}
+	
+	@When("^User selects classification and clicks on Delete$")
+	public void user_selects_classification_and_clicks_on_Delete(DataTable DelCl) throws InterruptedException  {
+		List<Map<String, String>> lista = DelCl.asMaps(String.class, String.class);
+		Thread.sleep(5000);
+        List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
+        System.out.println("No of Rows"+rows.size());
+        Boolean IsPresent =false;
+        for(int i=1;i<=rows.size();i++) {
+        	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
+        	String cdesc = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr["+ i+"]/td[2]")).getText();
+        	if(lista.get(0).get("Classification_Code").equals(gid)) {
+        		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr["+ i+"]/td[2]")));
+        		if(lista.get(0).get("Classification_Desc").equals(cdesc)) {
+        			driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr["+ i+"]/td[6]/a[2]")).click();	
+/*        			Actions actions = new Actions(driver);
+       				WebElement elem = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr["+ i+"]/td[6]/a[2]"));
+        			highlighter.highLightElement(driver, elem);
+        			actions.moveToElement(elem).perform();
+        			elem.click();*/
+        			IsPresent =true;
+        			break;
+        		}	
+        	}
+        }
+        if(IsPresent=false) {
+        	Assert.fail("Failed to Click the Delete Button");
+        	System.out.println("Delete Button Not Found");
+        }
+	}
+
+	@When("^User Clicks on Ok in Alert$")
+	public void user_Clicks_on_Ok_in_Alert() {
+		String atxt =driver.switchTo().alert().getText();
+		if(atxt.equals("Are you sure, you want to delete this record?")) {
+			driver.switchTo().alert().accept();	
+			System.out.println("Record is deleted");
+		}
+		else {
+			driver.switchTo().alert().dismiss();
+			Assert.fail("Alert Not found.Hence Cannot Be Deleted");
+		}
+	}
+
+	@Then("^new classification is not displayed in grid$")
+	public void new_classification_is_not_displayed_in_grid(DataTable DltChk) throws InterruptedException {
+		List<Map<String, String>> lista = DltChk.asMaps(String.class, String.class);
+		Thread.sleep(5000);
+        List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
+        boolean isFound = false;
+        for(int i=2;i<=rows.size();i++) {    	 
+        	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
+        	String cdesc = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
+        	String Short = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText();
+        	String cgrp = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[4]")).getText();
+        	String Wages = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[5]")).getText();	
+        	if(lista.get(0).get("Classification_Code").equals(gid)) {
+        		System.out.println("Classification Code Matched:"+gid);       		
+        		if(lista.get(0).get("Classification_Desc").equals(cdesc)) {
+        			System.out.println("Classification desc Matched:"+cdesc);
+        			if(lista.get(0).get("Short").equals(Short)) {
+        				System.out.println("Classification Short Matched:"+Short);	
+        				if(lista.get(0).get("Classification_Group").equals(cgrp))
+        					System.out.println("Classification_Group Matched:"+cgrp);
+        					if(lista.get(0).get("Wages").equals(Wages)){
+        						System.out.println("Wages Matched:"+Wages);
+        						isFound = true;
+        	        			 break;
+        					}
+        				}
+        			}
+            	}
+        }
+        driver.switchTo().defaultContent();
+        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
+		String title = driver.getTitle();
+	    Assert.assertEquals("Login | Local-13", title);    
+	    driver.close();
+	    if(isFound==true) {
+        	System.out.println("Data is Present");
+        	Assert.fail("Data is Present");
+        }
 	}
 
 }

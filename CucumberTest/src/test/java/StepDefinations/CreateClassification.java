@@ -49,10 +49,12 @@ public class CreateClassification {
 		WebElement AppsBuiler =driver.findElement(By.xpath("//*[@id=\"build_a_2\"]"));
 		highlighter.highLightElement(driver, AppsBuiler);
 		AppsBuiler.click();
-		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"build_div_1\"]/div/button[@class=\"next\"]/img")));
+		driver.switchTo().frame("functionContent");
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")));
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
-		driver.findElement(By.xpath("//*[@id=\"build_div_1\"]//button[@class=\"next\"]/img")).click();
+		driver.findElement(By.xpath("//td[contains(text(),\"Manage Classification\")]")).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.switchTo().defaultContent();
 		highlighter.highLightElement(driver, driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")));
 		driver.findElement(By.xpath("//a[text()=\"Manage Classification\"]")).click();
 		Thread.sleep(5000);
@@ -75,7 +77,7 @@ public class CreateClassification {
 		driver.findElement(By.xpath("//*[@id=\"Short\"]")).sendKeys(list.get(0).get("Short"));
 		driver.findElement(By.xpath("//*[@id=\"Wages\"]")).sendKeys(list.get(0).get("Wages"));
 		System.out.println("Data Entered Successfully");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"Submit\"]")).click();
 		System.out.println("User clicked on Submit");
 		
@@ -114,7 +116,10 @@ public class CreateClassification {
         	break;
         	
         	} 	 
-        }     
+        }  
+        
+        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]"));
+        
 	}
 
 }

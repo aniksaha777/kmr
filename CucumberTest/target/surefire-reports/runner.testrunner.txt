@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: runner.testrunner
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 2, Skipped: 3, Time elapsed: 0.578 s <<< FAILURE! - in runner.testrunner
-Given The User is logged in(Scenario: Manage Classification - Create Classification)  Time elapsed: 0.007 s  <<< ERROR!
+Tests run: 5, Failures: 0, Errors: 2, Skipped: 3, Time elapsed: 0.606 s <<< FAILURE! - in runner.testrunner
+Given The User is logged in(Scenario: Manage Classification - Create Classification)  Time elapsed: 0.004 s  <<< ERROR!
 cucumber.runtime.CucumberException: Failed to instantiate class StepDefinations.CreateClassification
 Caused by: java.lang.reflect.InvocationTargetException
 Caused by: java.lang.NullPointerException
 
-Scenario: Manage Classification - Create Classification  Time elapsed: 0.008 s  <<< ERROR!
+Scenario: Manage Classification - Create Classification  Time elapsed: 0.005 s  <<< ERROR!
 cucumber.runtime.CucumberException: Failed to instantiate class StepDefinations.CreateClassification
 Caused by: java.lang.reflect.InvocationTargetException
 Caused by: java.lang.NullPointerException

@@ -23,7 +23,7 @@ public class CreateClassification {
 	
 	WebDriver driver;
 	
-	WebDriverWait wait = new WebDriverWait(driver,30);
+	//WebDriverWait wait = new WebDriverWait(driver,30);
 	@Given("^The User is logged in$")
 	public void the_User_is_logged_in() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\SAMMSALAPTOP1\\Desktop\\AutomationDrivers\\chromedriver_win32\\chromedriver.exe");
@@ -120,7 +120,9 @@ public class CreateClassification {
         }  
         driver.switchTo().defaultContent();
         driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(text(),\"User Name\")]")));
+        //WebDriverWait wait = new WebDriverWait(driver,30);
+        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(text(),\"User Name\")]")));
+        //Thread.sleep(5000);
 		String title = driver.getTitle();
 	    Assert.assertEquals("Login | Local-13", title);
 	    

@@ -44,9 +44,9 @@ Scenario: Manage Attendence Category - Create Category
 	When User is on Manage Attendence Create Category Page
 	And User Enters Valid Data and Clicks on Submit
 	| AttendanceCategory | Points_Applied | Points_Lost  |
-	| Sunday Test Class | 1 | 0.2  |
+	| Sunday Test Class2 | 1 | 0.21  |
 	Then New Category is displayed in the grid
 	| AttendanceCategory | Points_Applied | Points_Lost  |
-	| Sunday Test Class | 1 | 0.2  |
+	| Sunday Test Class2 | 1 | 0.21  |
 
     

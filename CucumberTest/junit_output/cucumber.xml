@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="52.045317">
-<testcase classname="Local 13 Manage Classification" name="Manage Attendence Category - Create Category" time="52.045317">
-<system-out><![CDATA[Given The User is logged in.................................................passed
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="39.750956">
+<testcase classname="Local 13 Manage Classification" name="Manage Attendence Category - Create Category" time="39.750956">
+<failure message="java.lang.AssertionError: Data is not Present&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at StepDefinations.TestSteps.new_Category_is_displayed_in_the_grid(TestSteps.java:358)&#13;&#10;&#9;at ✽.Then New Category is displayed in the grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/TestCases.feature:48)&#13;&#10;"><![CDATA[Given The User is logged in.................................................passed
 When User is on Manage Attendence Create Category Page......................passed
 And User Enters Valid Data and Clicks on Submit.............................passed
-Then New Category is displayed in the grid..................................passed
-]]></system-out>
+Then New Category is displayed in the grid..................................failed
+
+StackTrace:
+java.lang.AssertionError: Data is not Present
+	at org.junit.Assert.fail(Assert.java:88)
+	at StepDefinations.TestSteps.new_Category_is_displayed_in_the_grid(TestSteps.java:358)
+	at ✽.Then New Category is displayed in the grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/TestCases.feature:48)
+]]></failure>
 </testcase>
 </testsuite>

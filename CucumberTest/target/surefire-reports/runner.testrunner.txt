@@ -1,4 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: runner.testrunner
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.456 s - in runner.testrunner
+Tests run: 5, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 40.341 s <<< FAILURE! - in runner.testrunner
+Then New Category is displayed in the grid(Scenario: Manage Attendence Category - Create Category)  Time elapsed: 0.008 s  <<< FAILURE!
+java.lang.AssertionError: Data is not Present
+
+Scenario: Manage Attendence Category - Create Category  Time elapsed: 0.008 s  <<< FAILURE!
+java.lang.AssertionError: Data is not Present
+

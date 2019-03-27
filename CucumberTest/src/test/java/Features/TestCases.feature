@@ -1,4 +1,4 @@
-Feature: Local 13 Manage Classification
+Feature: Local 13 Tests
 @SmokeTest @ManageClassification
  Scenario: Manage Classification - Create Classification
     Given The User is logged in

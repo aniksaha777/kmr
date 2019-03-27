@@ -84,28 +84,29 @@ formatter.match({
   "location": "TestSteps.the_User_is_logged_in()"
 });
 formatter.result({
-  "duration": 22719341165,
+  "duration": 17400702818,
   "status": "passed"
 });
 formatter.match({
   "location": "TestSteps.user_is_on_Manage_Attendence_Create_Category_Page()"
 });
 formatter.result({
-  "duration": 15160905808,
+  "duration": 11268721418,
   "status": "passed"
 });
 formatter.match({
   "location": "TestSteps.user_Enters_Valid_Data_and_Clicks_on_Submit(DataTable)"
 });
 formatter.result({
-  "duration": 6468843044,
+  "duration": 3736288061,
   "status": "passed"
 });
 formatter.match({
   "location": "TestSteps.new_Category_is_displayed_in_the_grid(DataTable)"
 });
 formatter.result({
-  "duration": 7696227134,
-  "status": "passed"
+  "duration": 7345243334,
+  "error_message": "java.lang.AssertionError: Data is not Present\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat StepDefinations.TestSteps.new_Category_is_displayed_in_the_grid(TestSteps.java:358)\r\n\tat ✽.Then New Category is displayed in the grid(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/TestCases.feature:48)\r\n",
+  "status": "failed"
 });
 });

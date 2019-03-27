@@ -1,25 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="3" time="265.564703">
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Create Classification" time="100.235238">
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="52.045317">
+<testcase classname="Local 13 Manage Classification" name="Manage Attendence Category - Create Category" time="52.045317">
 <system-out><![CDATA[Given The User is logged in.................................................passed
-When User is on Apps Builder Create Classification Page.....................passed
-And the user enters valid data and clicks on Submit.........................passed
-Then new classification is displayed in grid................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Edit Classification" time="82.285207">
-<system-out><![CDATA[Given The User is logged in.................................................passed
-When User is on Apps Builder Edit Classification Page.......................passed
-And User selects classification and clicks on Edit..........................passed
-And User Edits classification data and clicks on Submit.....................passed
-Then new classification is displayed in grid................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Local 13 Manage Classification" name="Manage Classification - Delete Classification" time="83.044258">
-<system-out><![CDATA[Given The User is logged in.................................................passed
-When User is on Apps Builder Edit Classification Page.......................passed
-And User selects classification and clicks on Delete........................passed
-And User Clicks on Ok in Alert..............................................passed
-Then new classification is not displayed in grid............................passed
+When User is on Manage Attendence Create Category Page......................passed
+And User Enters Valid Data and Clicks on Submit.............................passed
+Then New Category is displayed in the grid..................................passed
 ]]></system-out>
 </testcase>
 </testsuite>

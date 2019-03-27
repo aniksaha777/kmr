@@ -12,6 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.jsoup.nodes.DataNode;
 import org.junit.Assert;
 import org.junit.Assert.*;
 import cucumber.api.DataTable;
@@ -22,7 +23,7 @@ import runner.highlighter;
 import org.openqa.selenium.*;
 @SuppressWarnings("deprecation")
 
-public class ManageClassification {
+public class TestSteps {
 	
 	WebDriver driver;
 	
@@ -38,6 +39,7 @@ public class ManageClassification {
 	    WebElement uname = driver.findElement(By.xpath("//*[@id=\"email\"]"));
 	    highlighter.highLightElement(driver, uname);
 		uname.sendKeys("mgg");
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"password\"]")));
 		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("mgg1105");
 		driver.findElement(By.xpath("//*[@id=\"submit\"]")).click(); 
 		boolean isPresent = driver.findElement(By.xpath("//*[@title=\"Log Out\"]")).isDisplayed();
@@ -192,7 +194,6 @@ public class ManageClassification {
 		List<Map<String, String>> lista = DelCl.asMaps(String.class, String.class);
 		Thread.sleep(5000);
         List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
-        System.out.println("No of Rows"+rows.size());
         Boolean IsPresent =false;
         for(int i=1;i<=rows.size();i++) {
         	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
@@ -236,7 +237,7 @@ public class ManageClassification {
 		Thread.sleep(5000);
         List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
         boolean isFound = false;
-        for(int i=2;i<=rows.size();i++) {    	 
+        for(int i=2;i<=rows.size();i++) { 	   	 
         	String gid = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
         	String cdesc = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
         	String Short = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText();
@@ -248,7 +249,7 @@ public class ManageClassification {
         			System.out.println("Classification desc Matched:"+cdesc);
         			if(lista.get(0).get("Short").equals(Short)) {
         				System.out.println("Classification Short Matched:"+Short);	
-        				if(lista.get(0).get("Classification_Group").equals(cgrp))
+        				if(lista.get(0).get("Classification_Group").equals(cgrp)) {
         					System.out.println("Classification_Group Matched:"+cgrp);
         					if(lista.get(0).get("Wages").equals(Wages)){
         						System.out.println("Wages Matched:"+Wages);
@@ -258,6 +259,7 @@ public class ManageClassification {
         				}
         			}
             	}
+        	}
         }
         driver.switchTo().defaultContent();
         driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
@@ -269,5 +271,94 @@ public class ManageClassification {
         	Assert.fail("Data is Present");
         }
 	}
+	
+	
+	@When("^User is on Manage Attendence Create Category Page$")
+	public void user_is_on_Manage_Attendence_Create_Category_Page(){
+		WebElement Training =driver.findElement(By.xpath("//*[@id=\"build_a_9\"]"));
+		highlighter.highLightElement(driver, Training);
+		Training.click();
+		driver.switchTo().frame("functionContent");
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//td[contains(text(),\"Attendance Category\")]")));
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		driver.findElement(By.xpath("//td[contains(text(),\"Attendance Category\")]")).click();
+		driver.switchTo().defaultContent();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")));
+		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"function_116\"]/span/a")));
+		driver.findElement(By.xpath("//*[@id=\"function_116\"]/span/a")).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.switchTo().frame("functionContent");
+		boolean isPresent = driver.findElement(By.xpath("//*[@id=\"frm5\"]//td[contains(text(),\"Create Attendance\")]")).isDisplayed();
+		if(!isPresent) {
+			System.out.println("User is not in Create Attendence Page");
+			Assert.fail("User is not in Create Attendence Page");
+		}
 
+	}
+	@When("^User Enters Valid Data and Clicks on Submit$")
+	public void user_Enters_Valid_Data_and_Clicks_on_Submit(DataTable CrtAttCat) {
+		List<Map<String, String>> listatt = CrtAttCat.asMaps(String.class, String.class);
+		
+		driver.findElement(By.xpath("//*[@id=\"AttendanceCategoryName\"]")).sendKeys(listatt.get(0).get("AttendanceCategory"));
+		driver.findElement(By.xpath("//*[@id=\"PointsApplied\"]")).sendKeys(listatt.get(0).get("Points_Applied"));
+		driver.findElement(By.xpath("//*[@id=\"PointsLost\"]")).sendKeys(listatt.get(0).get("Points_Lost"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Data Entered Successfully");
+		driver.findElement(By.xpath("//*[@id=\"Submit\"]")).click();
+		System.out.println("User Clicked on Submit");
+	}
+
+	@Then("^New Category is displayed in the grid$")
+	public void new_Category_is_displayed_in_the_grid(DataTable VerAttCat) {
+		List<Map<String, String>> lista = VerAttCat.asMaps(String.class, String.class);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List  col = driver.findElements(By.xpath("//*[@id=\"list\"]//tr[1]/td"));
+		System.out.println("Col "+col.size());
+        List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]//tr/td[1]")); 
+        System.out.println("Rows "+rows.size());
+        boolean isFound = false;
+        for(int i=2;i<=rows.size();i++) {    	 
+        	String Attcat = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[1]")).getText();
+        	String Pappl = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
+        	String Plost = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText();
+        	
+        	if(lista.get(0).get("AttendanceCategory").equals(Attcat)) {
+        		System.out.println("Classification Code Matched:"+Attcat);       		
+        		if(lista.get(0).get("Points_Applied").equals(Pappl)) {
+        			System.out.println("Classification desc Matched:"+Pappl);
+        			if(lista.get(0).get("Points_Lost").equals(Plost)) {
+        				System.out.println("Classification Short Matched:"+Plost);	
+						isFound = true;
+	        			 break;				
+    				}
+        		}
+            }
+        }
+        driver.switchTo().defaultContent();
+        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
+		String title = driver.getTitle();
+	    Assert.assertEquals("Login | Local-13", title);    
+	    driver.close();
+	    if(isFound==false) {
+        	System.out.println("Row Not found");
+        	Assert.fail("Data is not Present");
+        } 	
+
+
+	}
+	
 }

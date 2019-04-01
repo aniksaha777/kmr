@@ -63,7 +63,7 @@ Scenario: Manage Attendance Category - Edit Category
 	| AttendanceCategory | Points_Applied | Points_Lost  |
 	| Sunday Test Classs2 | 2 | 0.51  |
     
-@ManageAttendanceCategory @Training @Current
+@ManageAttendanceCategory @Training
 Scenario: Manage Attendance Category - Delete Category
 	Given The User is logged in
 	When User is on Manage Attendance Category Page
@@ -74,3 +74,30 @@ Scenario: Manage Attendance Category - Delete Category
 	Then New Category is not displayed in the grid
 	| AttendanceCategory | Points_Applied | Points_Lost  |
 	| Sunday Test Classs2 | 2 | 0.51  |
+	
+@CreateApplicant @Training	@Current
+Scenario: Manage Applicant - Create Applicant
+	Given The User is logged in
+	When User is on Create Applicant Page
+	And User Enters Valid Data for Contact Info Section
+	| LastName | FirstName | MiddleName | CareOf | Address1 | Address2 | Zip | Country | City | State | EmailAddress | AlternateEmail | HomePhone | CellPhone |
+	| testb | testb | B | testb | testb | testb | 00610 | USA | City | PUERTO RICO | test123@test.com | anik.sammsa@gmail.com | 1234567893 | 2345678931 |
+	And User Enters Valid Data for Applicant Census Info
+	| SSN | DOB | ApplicantType | ApplicationDate | Gender | MaritalStatus | Race |
+	| 232323249 | 03/01/2019 | Plumber | 03/01/2019 | Male | Separated | Asian |	
+	And User Enters Misc Info
+	| MILITARY | OVER18 | HelmetstoHardhats | HSGEDEquivalent | Resident | DriversLicense | RulesSigned | CITIZEN | CanWork | SignedScholarship | DirectEntry | Folder | RelatedWorkExperience | ApplicantNumber | Veteran |
+	| No | No | No | HS | No | testlicense | No | No | No | No | directentry | Folder12 | testtWorkExperience | 123 | No |
+	And User Enters Training Group
+	| StudentID | DepartmentofLaborID | ApprenticeshipNumber |
+	| 15 | 213 | 2334 |
+	And Clicks on Submit
+	Then Applicant Details should be displayed in Grid on Search
+	| LastName | FirstName | MiddleName | SSN | ApplicationDate |
+	| testb | testb | B | 232323249 | 03/01/2019 |
+	
+	
+		
+	
+	
+	

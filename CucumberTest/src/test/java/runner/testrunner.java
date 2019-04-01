@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 		format= {"pretty","html:test-output","json:json_output/cucumber.json","junit:junit_output/cucumber.xml"},
 		dryRun= false,
 		monochrome= true,
-		tags = {"@ManageAttendanceCategory"}
+		tags = {"@Current"}
 		)
 public class testrunner {
  

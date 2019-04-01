@@ -1,8 +1,10 @@
 
 package StepDefinations;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,16 +14,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.jsoup.nodes.DataNode;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.junit.Assert.*;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import cucumber.runtime.junit.Assertions;
 import runner.highlighter;
 import org.openqa.selenium.*;
-@SuppressWarnings("deprecation")
+
 
 public class TestSteps {
 	
@@ -41,7 +42,7 @@ public class TestSteps {
 		uname.sendKeys("mgg");
 		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"password\"]")));
 		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("mgg1105");
-		driver.findElement(By.xpath("//*[@id=\"submit\"]")).click(); 
+		driver.findElement(By.xpath("//*[@id=\"submit\"]")).click();
 		boolean isPresent = driver.findElement(By.xpath("//*[@title=\"Log Out\"]")).isDisplayed();
 		if(isPresent= true) {
 			System.out.println("User is Logged in Successfully");
@@ -70,7 +71,6 @@ public class TestSteps {
 		driver.findElement(By.xpath("//*[@id=\"function_111\"]/span/a")).click();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
 		driver.switchTo().frame("functionContent");
-	    
 	}
 
 	@When("^the user enters valid data and clicks on Submit$")
@@ -224,6 +224,12 @@ public class TestSteps {
 		if(atxt.equals("Are you sure, you want to delete this record?")) {
 			driver.switchTo().alert().accept();	
 			System.out.println("Record is deleted");
+			File src =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			try {
+				FileUtils.copyFile(src, new File ("C:\\selenium\\error.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			driver.switchTo().alert().dismiss();
@@ -414,8 +420,6 @@ public class TestSteps {
 	}
 	@When("^User Edits Valid Data and Clicks on Submit$")
 	public void user_Edits_Valid_Data_and_Clicks_on_Submit(DataTable EdtAttCat) {
-		
-		
 		List<Map<String, String>> listedtatt = EdtAttCat.asMaps(String.class, String.class);
 		driver.findElement(By.xpath("//*[@id=\"AttendanceCategoryName\"]")).clear();
 		driver.findElement(By.xpath("//*[@id=\"AttendanceCategoryName\"]")).sendKeys(listedtatt.get(0).get("AttendanceCategory"));
@@ -513,6 +517,189 @@ public class TestSteps {
         	Assert.fail("Data Not Deleted");
         } 	
 	
+	}
+	@When("^User is on Create Applicant Page$")
+	public void user_is_on_Create_Applicant_Page() throws Throwable {
+		WebElement Training =driver.findElement(By.xpath("//*[@id=\"build_a_9\"]"));
+		highlighter.highLightElement(driver, Training);
+		Training.click();
+		driver.switchTo().frame("functionContent");
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//td[contains(text(),\"Manage Applicant\")]")));
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		driver.findElement(By.xpath("//td[contains(text(),\"Manage Applicant\")]")).click();
+		driver.switchTo().defaultContent();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")));
+		driver.findElement(By.xpath("//*[@title=\"Open West Pane\"]")).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		highlighter.highLightElement(driver, driver.findElement(By.xpath("//*[@id=\"function_108\"]/span/a")));
+		driver.findElement(By.xpath("//*[@id=\"function_108\"]/span/a")).click();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
+		driver.switchTo().frame("functionContent");
+		boolean isPresent = driver.findElement(By.xpath("//*[@id=\"tabs\"]//a[contains(text(),\"Applicant Info\")]")).isDisplayed();
+		if(!isPresent) {
+			System.out.println("User is not in Create Page");
+			Assert.fail("User is not in Create Page");
+		}		
+	}
+
+	@When("^User Enters Valid Data for Contact Info Section$")
+	public void user_Enters_Valid_Data_for_Contact_Info_Section(DataTable ContactInfo) {
+		List<Map<String, String>> cntctInfo = ContactInfo.asMaps(String.class, String.class);
+		driver.findElement(By.xpath("//*[@id=\"45\"]")).sendKeys(cntctInfo.get(0).get("LastName"));
+		driver.findElement(By.xpath("//*[@id=\"46\"]")).sendKeys(cntctInfo.get(0).get("FirstName"));
+		driver.findElement(By.xpath("//*[@id=\"68\"]")).sendKeys(cntctInfo.get(0).get("MiddleName"));
+		driver.findElement(By.xpath("//*[@id=\"57\"]")).sendKeys(cntctInfo.get(0).get("CareOf"));
+		driver.findElement(By.xpath("//*[@id=\"54\"]")).sendKeys(cntctInfo.get(0).get("Address1"));
+		driver.findElement(By.xpath("//*[@id=\"55\"]")).sendKeys(cntctInfo.get(0).get("Address2"));
+		driver.findElement(By.xpath("//*[@id=\"tab1\"]//tr[9]/td[3]/span/input[1]")).sendKeys(cntctInfo.get(0).get("Zip"));
+		String zip =cntctInfo.get(0).get("Zip");
+		driver.findElement(By.xpath("//td[@field=\"ZipCode\"]/div[contains(text(),"+zip+")]")).click();;
+		Select country = new Select(driver.findElement(By.id("17")));
+		country.selectByVisibleText(cntctInfo.get(0).get("Country"));
+		Select State = new Select(driver.findElement(By.id("19")));
+		State.selectByVisibleText(cntctInfo.get(0).get("State"));
+		driver.findElement(By.xpath("//*[@id=\"49\"]")).sendKeys(cntctInfo.get(0).get("EmailAddress"));
+		driver.findElement(By.xpath("//*[@id=\"56\"]")).sendKeys(cntctInfo.get(0).get("AlternateEmail"));
+		driver.findElement(By.xpath("//*[@id=\"10180\"]")).sendKeys(cntctInfo.get(0).get("HomePhone"));
+		driver.findElement(By.xpath("//*[@id=\"10181\"]")).sendKeys(cntctInfo.get(0).get("CellPhone"));
+		
+		
+		
+		
+	}
+
+	@When("^User Enters Valid Data for Applicant Census Info$")
+	public void user_Enters_Valid_Data_for_Applicant_Census_Info(DataTable AppCenInfo) {
+		List<Map<String, String>> AppCenIn = AppCenInfo.asMaps(String.class, String.class);
+		driver.findElement(By.xpath("//*[@id=\"50\"]")).sendKeys(AppCenIn.get(0).get("SSN"));
+		driver.findElement(By.xpath("//*[@id=\"52\"]")).sendKeys(AppCenIn.get(0).get("DOB"));
+		Select AppType = new Select(driver.findElement(By.xpath("//*[@id=\"10178\"]")));
+		AppType.selectByVisibleText(AppCenIn.get(0).get("ApplicantType"));
+		driver.findElement(By.xpath("//*[@id=\"10140\"]")).sendKeys(AppCenIn.get(0).get("ApplicationDate"));
+		Select gender = new Select(driver.findElement(By.xpath("//*[@id=\"65\"]")));
+		gender.selectByVisibleText(AppCenIn.get(0).get("Gender"));
+		driver.findElement(By.xpath("//*[@id=\"66\"]")).sendKeys(AppCenIn.get(0).get("Gender"));
+		Select mStatus = new Select(driver.findElement(By.xpath("//*[@id=\"66\"]")));
+		mStatus.selectByVisibleText(AppCenIn.get(0).get("MaritalStatus"));
+		Select Race = new Select(driver.findElement(By.xpath("//*[@id=\"67\"]")));
+		Race.selectByVisibleText(AppCenIn.get(0).get("Race"));
+		
+		
+	}
+
+	@When("^User Enters Misc Info$")
+	public void user_Enters_Misc_Info(DataTable MiscInf) {
+		List<Map<String, String>> MiscInfo = MiscInf.asMaps(String.class, String.class);
+		
+		Select military = new Select(driver.findElement(By.xpath("//*[@id=\"10131\"]")));
+		military.selectByVisibleText(MiscInfo.get(0).get("MILITARY"));
+		
+		Select over18 = new Select(driver.findElement(By.xpath("//*[@id=\"10132\"]")));
+		over18.selectByVisibleText(MiscInfo.get(0).get("OVER18"));
+		
+		Select Helmetstohardhats = new Select(driver.findElement(By.xpath("//*[@id=\"10133\"]")));
+		Helmetstohardhats.selectByVisibleText(MiscInfo.get(0).get("HelmetstoHardhats"));
+		
+		Select HsGdEq = new Select(driver.findElement(By.xpath("//*[@id=\"10134\"]")));
+		HsGdEq.selectByVisibleText(MiscInfo.get(0).get("HSGEDEquivalent"));
+		
+		Select Resident = new Select(driver.findElement(By.xpath("//*[@id=\"10135\"]")));
+		Resident.selectByVisibleText(MiscInfo.get(0).get("Resident"));
+		
+		driver.findElement(By.xpath("//*[@id=\"10136\"]")).sendKeys(MiscInfo.get(0).get("DriversLicense"));
+		
+		Select RulesSigned = new Select(driver.findElement(By.xpath("//*[@id=\"10137\"]")));
+		RulesSigned.selectByVisibleText(MiscInfo.get(0).get("RulesSigned"));
+		
+		Select CITIZEN = new Select(driver.findElement(By.xpath("//*[@id=\"10138\"]")));
+		CITIZEN.selectByVisibleText(MiscInfo.get(0).get("CITIZEN"));
+		
+		Select CanWork = new Select(driver.findElement(By.xpath("//*[@id=\"10139\"]")));
+		CanWork.selectByVisibleText(MiscInfo.get(0).get("CanWork"));
+		
+		driver.findElement(By.xpath("//*[@id=\"10160\"]")).sendKeys(MiscInfo.get(0).get("DirectEntry"));
+		driver.findElement(By.xpath("//*[@id=\"10177\"]")).sendKeys(MiscInfo.get(0).get("Folder"));
+		driver.findElement(By.xpath("//*[@id=\"10148\"]")).sendKeys(MiscInfo.get(0).get("RelatedWorkExperience"));
+		driver.findElement(By.xpath("//*[@id=\"10150\"]")).sendKeys(MiscInfo.get(0).get("ApplicantNumber"));
+		
+		Select Veteran =new Select(driver.findElement(By.xpath("//*[@id=\"10174\"]")));
+		Veteran.selectByVisibleText(MiscInfo.get(0).get("Veteran"));
+		
+		
+		
+	}
+
+	@When("^User Enters Training Group$")
+	public void user_Enters_Training_Group(DataTable TrInfo) {
+		List<Map<String, String>> TrInf = TrInfo.asMaps(String.class, String.class);
+		driver.findElement(By.xpath("//*[@id=\"10143\"]")).sendKeys(TrInf.get(0).get("StudentID"));
+		driver.findElement(By.xpath("//*[@id=\"10144\"]")).sendKeys(TrInf.get(0).get("DepartmentofLaborID"));
+		driver.findElement(By.xpath("//*[@id=\"10146\"]")).sendKeys(TrInf.get(0).get("ApprenticeshipNumber"));
+	}
+
+	@When("^Clicks on Submit$")
+	public void clicks_on_Submit() {
+		driver.findElement(By.xpath("//*[@id=\"dynamic_submit\"]")).click();
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Then("^Applicant Details should be displayed in Grid on Search$")
+	public void applicant_Details_should_be_displayed_in_Grid_on_Search(DataTable VerifyData) {
+		List<Map<String,String>> Vdata = VerifyData.asMaps(String.class, String.class);	
+		driver.findElement(By.xpath("//*[@id=\"gs_LASTNAME\"]")).sendKeys(Vdata.get(0).get("LastName"));
+		driver.findElement(By.xpath("//*[@id=\"gs_SSN\"]")).sendKeys(Vdata.get(0).get("SSN"));
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List  rows = driver.findElements(By.xpath("//*[@id=\"list\"]/tbody/tr/td[1]")); 
+		boolean isFound = false;
+        
+		for(int i=2;i<=rows.size();i++) {    	 
+        	String LastName = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[2]")).getText();
+        	String FirstName = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[3]")).getText();
+        	String MiddleName = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[4]")).getText();
+        	String SSN = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[" + i+ "]/td[5]")).getText();	
+        	String ApplicationDate = driver.findElement(By.xpath("//*[@id=\"list\"]/tbody/tr[2]/td[9]")).getText();
+        	
+        	if(Vdata.get(0).get("SSN").equals(SSN)) {
+        		System.out.println("SSN Matched:"+SSN);       		
+        		if(Vdata.get(0).get("LastName").equals(LastName)) {
+        			System.out.println("Last Name Matched:"+LastName);
+        			if(Vdata.get(0).get("FirstName").equals(FirstName)) {
+        				System.out.println("First Name Matched:"+FirstName);	
+        				if(Vdata.get(0).get("MiddleName").equals(MiddleName)) {
+        					System.out.println("Middle Name Matched:"+FirstName);
+        					if(Vdata.get(0).get("ApplicationDate").equals(ApplicationDate)) {
+        						System.out.println("Application Date Matched:"+ApplicationDate);
+        						isFound = true;
+        		        		break;				
+        					}
+        				}								
+    				}
+        		}
+            }
+        }
+		 driver.switchTo().defaultContent();
+	        driver.findElement(By.xpath("//a[@href=\"/local13test/index/logout\"]")).click();
+			String title = driver.getTitle();
+		    Assert.assertEquals("Login | Local-13", title);    
+		    driver.close();
+		    if(isFound==false) {
+	        	System.out.println("Data didnt Match.");
+	        	Assert.fail("Data didnt Match");
+	        } 	
 	}
 
 }

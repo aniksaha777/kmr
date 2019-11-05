@@ -1,13 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="72.654035">
-<testcase classname="Local 13 Tests" name="Manage Applicant - Create Applicant" time="72.654035">
-<system-out><![CDATA[Given The User is logged in.................................................passed
-When User is on Create Applicant Page.......................................passed
-And User Enters Valid Data for Contact Info Section.........................passed
-And User Enters Valid Data for Applicant Census Info........................passed
-And User Enters Misc Info...................................................passed
-And User Enters Training Group..............................................passed
-And Clicks on Submit........................................................passed
-Then Applicant Details should be displayed in Grid on Search................passed
-]]></system-out>
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="1" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="47.216169">
+<testcase classname="AFM online Join" name="Login to Local" time="47.216169">
+<failure message="java.lang.RuntimeException: Unexpected result for screenshot command: null&#13;&#10;&#9;at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:397)&#13;&#10;&#9;at runner.Screenshots.capture(Screenshots.java:16)&#13;&#10;&#9;at StepDefinations.TestSteps.user_Enters_the_Member_Details(TestSteps.java:126)&#13;&#10;&#9;at ✽.When User Enters the Member Details(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/AFMOnlineJoin.feature:8)&#13;&#10;"><![CDATA[Given The User is on the AFM Online join Page...............................passed
+When User Enters the Member Details.........................................failed
+And Clicks on Continue......................................................skipped
+And User Enters the Contact Details.........................................skipped
+And Clicks on Continue......................................................skipped
+And User Enters Instrument Details..........................................skipped
+And Clicks on Continue......................................................skipped
+And User Accepts Terms and Conditions with Signature........................skipped
+And Clicks on Continue......................................................skipped
+And User Verifies the Payment Page..........................................skipped
+And Clicks on Continue......................................................skipped
+And Checks out to Pay through Paypal........................................skipped
+And Logs into paypal........................................................skipped
+And Completes payment through Paypal........................................skipped
+Then The user should be Registered Successfully.............................skipped
+
+StackTrace:
+java.lang.RuntimeException: Unexpected result for screenshot command: null
+	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:397)
+	at runner.Screenshots.capture(Screenshots.java:16)
+	at StepDefinations.TestSteps.user_Enters_the_Member_Details(TestSteps.java:126)
+	at ✽.When User Enters the Member Details(C:/Users/SAMMSALAPTOP1/Desktop/Automation/MyGitHub/CucumberTest/src/test/java/Features/AFMOnlineJoin.feature:8)
+]]></failure>
 </testcase>
 </testsuite>

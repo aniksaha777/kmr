@@ -10,7 +10,7 @@ public class highlighter {
 	
 	public static void highLightElement(WebDriver driver, WebElement element){
 	JavascriptExecutor js=(JavascriptExecutor)driver;  
-	js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+	js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
 	try {
 	Thread.sleep(1000);
 	} 
